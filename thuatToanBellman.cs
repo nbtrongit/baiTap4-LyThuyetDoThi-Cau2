@@ -29,10 +29,26 @@ namespace BT4_LTDT_Cau2
                 {
                     Cost[Step, k] = Cost[Step - 1, k];
                     Prev[Step, k] = Prev[Step - 1, k];
-                    for(int v = 0; v < AM.n; v++)
+                    for(int v = 0; v < AM.n; v++) //duyệt từng đỉnh j
                     {
-                        if(AM.maTran[v, k] != 0 && ) 
+                        if(AM.maTran[v, k] != 0)
+                        {
+
+                        }
                     }
+                }
+                bool kiemTra = true;
+                for (int k = 0; k < AM.n; k++) //duyệt từng đỉnh i
+                {
+                    if(Cost[Step, k] != Cost[Step - 1, k])
+                    {
+                        kiemTra = false;
+                        break;
+                    }
+                }
+                if (kiemTra)
+                {
+                    break;
                 }
             }
         }
