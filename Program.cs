@@ -45,7 +45,7 @@ namespace BT4_LTDT_Cau2
                 }
                 Console.WriteLine("Nhập đỉnh bắt đầu");
                 int dinhBatDau = int.Parse(Console.ReadLine());
-                thuatToanBellman.Bellman();
+                thuatToanBellman.Bellman(AM, dinhBatDau);
             }
         }
     }

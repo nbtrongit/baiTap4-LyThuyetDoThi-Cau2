@@ -23,32 +23,82 @@ namespace BT4_LTDT_Cau2
                 }
             }
             Cost[0, dinhBatDau] = 0;
-            for (Step = 1; Step <= AM.n; Step++) //step k
+            for (Step = 1; Step <= AM.n; Step++) //step i
             {
-                for (int k = 0; k < AM.n; k++) //duyệt từng đỉnh i
+                for (int i = 0; i < AM.n; i++) //duyệt từng đỉnh i
                 {
-                    Cost[Step, k] = Cost[Step - 1, k];
-                    Prev[Step, k] = Prev[Step - 1, k];
+                    Cost[Step, i] = Cost[Step - 1, i];
+                    Prev[Step, i] = Prev[Step - 1, i];
                     for(int v = 0; v < AM.n; v++) //duyệt từng đỉnh j
                     {
-                        if(AM.maTran[v, k] != 0)
+                        if(AM.maTran[v, i] != 0 && Cost[Step - 1, v] != voCuc)
                         {
-
+                            if(Cost[Step, i] == voCuc || (Cost[Step - 1, v] + AM.maTran[v, i]) < Cost[Step, i])
+                            {
+                                Cost[Step, i] = Cost[Step - 1, v] + AM.maTran[v, i];
+                                Prev[Step, i] = v;
+                            }
                         }
                     }
                 }
-                bool kiemTra = true;
-                for (int k = 0; k < AM.n; k++) //duyệt từng đỉnh i
+                bool iiemTra = true;
+                for (int i = 0; i < AM.n; i++) //duyệt từng đỉnh i
                 {
-                    if(Cost[Step, k] != Cost[Step - 1, k])
+                    if(Cost[Step, i] != Cost[Step - 1, i])
                     {
-                        kiemTra = false;
+                        iiemTra = false;
                         break;
                     }
                 }
-                if (kiemTra)
+                if (iiemTra)
                 {
                     break;
+                }
+            }
+            for (int i = 0; i < Cost.GetLength(0); i++)
+            {
+                for (int j = 0; j < Cost.GetLength(1); j++)
+                {
+                    Console.Write($"{Cost[i, j]} ");
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine(Step);
+            for (int i = 0; i < Cost.GetLength(0); i++)
+            {
+                for (int j = 0; j < Cost.GetLength(1); j++)
+                {
+                    Console.Write($"{Prev[i, j]} ");
+                }
+                Console.WriteLine();
+            }
+            if(Step == AM.n + 1)
+            {
+                Console.WriteLine("Đồ thị có mạch âm");
+            }
+            else
+            {
+                for(int i = 0; i < Prev.GetLength(1); i++)
+                {
+                    if(i != dinhBatDau)
+                    {
+                        Console.Write($"Đường đi ngắn nhất từ {dinhBatDau} đến {i}: ");
+                        if(Prev[Step, i] >= 0)
+                        {
+                            int index = i;
+                            while(index != dinhBatDau)
+                            {
+                                Console.Write($"{Prev[Step, index]} <-");
+                                index = Prev[Step, index];
+                            }
+                            Console.WriteLine();
+                        }
+                        else
+                        {
+                            Console.Write("Không có đường đi");
+                            Console.WriteLine();
+                        }
+                    }
                 }
             }
         }
