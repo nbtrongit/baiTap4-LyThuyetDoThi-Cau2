@@ -41,36 +41,19 @@ namespace BT4_LTDT_Cau2
                         }
                     }
                 }
-                bool iiemTra = true;
+                bool kiemTra = true;
                 for (int i = 0; i < AM.n; i++) //duyệt từng đỉnh i
                 {
                     if(Cost[Step, i] != Cost[Step - 1, i])
                     {
-                        iiemTra = false;
+                        kiemTra = false;
                         break;
                     }
                 }
-                if (iiemTra)
+                if (kiemTra)
                 {
                     break;
                 }
-            }
-            for (int i = 0; i < Cost.GetLength(0); i++)
-            {
-                for (int j = 0; j < Cost.GetLength(1); j++)
-                {
-                    Console.Write($"{Cost[i, j]} ");
-                }
-                Console.WriteLine();
-            }
-            Console.WriteLine(Step);
-            for (int i = 0; i < Cost.GetLength(0); i++)
-            {
-                for (int j = 0; j < Cost.GetLength(1); j++)
-                {
-                    Console.Write($"{Prev[i, j]} ");
-                }
-                Console.WriteLine();
             }
             if(Step == AM.n + 1)
             {
@@ -86,12 +69,16 @@ namespace BT4_LTDT_Cau2
                         if(Prev[Step, i] >= 0)
                         {
                             int index = i;
-                            while(index != dinhBatDau)
+                            int tong = 0;
+                            Console.Write(index);
+                            while (index != dinhBatDau)
                             {
-                                Console.Write($"{Prev[Step, index]} <-");
+                                Console.Write($" <- {Prev[Step, index]}");
+                                tong += Cost[Step, index];
                                 index = Prev[Step, index];
                             }
                             Console.WriteLine();
+                            Console.WriteLine($"Chi phí đường đi ngắn nhât: {Cost[Step, i]}"); ;
                         }
                         else
                         {

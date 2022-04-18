@@ -35,14 +35,6 @@ namespace BT4_LTDT_Cau2
             else
             {
                 maTranKe AM = maTran(filename);
-                for (int i = 0; i < AM.n; i++)
-                {
-                    for (int j = 0; j < AM.n; j++)
-                    {
-                        Console.Write($"{AM.maTran[i, j]} ");
-                    }
-                    Console.WriteLine();
-                }
                 Console.WriteLine("Nhập đỉnh bắt đầu");
                 int dinhBatDau = int.Parse(Console.ReadLine());
                 thuatToanBellman.Bellman(AM, dinhBatDau);
